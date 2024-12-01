@@ -68,7 +68,7 @@ fun MenuScreen(navController: NavController) {
                     }
 
                     Button(
-                        onClick = { /* Lógica para listar produtos */ },
+                        onClick = { navController.navigate(Screen.ListarProdutos.route) },
                         modifier = Modifier.width(150.dp).padding(8.dp)
                     ) {
                         Text(
