@@ -3,45 +3,33 @@ package com.example.imdmarket
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.activity.viewModels
+import com.example.imdmarket.ui.login.LoginScreen
+import com.example.imdmarket.viewmodel.LoginViewModel
 import com.example.imdmarket.ui.theme.IMDMarketTheme
 
 class MainActivity : ComponentActivity() {
+    private val loginViewModel: LoginViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContent {
+
             IMDMarketTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+                LoginScreen(
+                    onLoginClick = { username, password ->
+                        loginViewModel.login(username, password,
+                            onLoginSuccess = { /* Navegar para a próxima tela */ },
+                            onLoginFailure = { errorMessage ->
+                                // Exibir mensagem de erro, como um Toast
+                            }
+                        )
+                    },
+                    onForgotPasswordClick = {
+                        loginViewModel.forgotPassword()
+                    }
+                )
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    IMDMarketTheme {
-        Greeting("Android")
     }
 }
