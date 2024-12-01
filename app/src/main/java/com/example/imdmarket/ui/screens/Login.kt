@@ -36,15 +36,15 @@ fun LoginScreen(
             TopAppBar(
                 title = {
                     Text(
-                        text = "IMD Market",  // Nome da aplicação
-                        color = Color.White,  // Cor do texto
+                        text = "IMD Market",
+                        color = Color.White,
                         fontWeight = FontWeight.Bold,
                         modifier = Modifier.fillMaxWidth(),
                         textAlign = TextAlign.Center
                     )
                 },
                 colors = TopAppBarDefaults.mediumTopAppBarColors(
-                    containerColor = Color(0xFF0F3C8D)  // Cor de fundo da barra
+                    containerColor = Color(0xFF0F3C8D)
                 )
             )
         },

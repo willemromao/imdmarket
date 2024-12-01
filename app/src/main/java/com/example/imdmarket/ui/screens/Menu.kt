@@ -24,8 +24,8 @@ fun MenuScreen(navController: NavController) {
             TopAppBar(
                 title = {
                     Text(
-                        text = "IMD Market",  // Nome da aplicação
-                        color = Color.White,  // Cor do texto
+                        text = "IMD Market",
+                        color = Color.White,
                         fontWeight = FontWeight.Bold
                     )
                 },
@@ -46,8 +46,8 @@ fun MenuScreen(navController: NavController) {
                 Text(
                     "O que deseja fazer?",
                     style = MaterialTheme.typography.bodyLarge.copy(
-                        fontSize = 24.sp,  // Aumenta o tamanho da fonte
-                        fontWeight = FontWeight.Bold  // Deixa o texto mais grosso
+                        fontSize = 24.sp,
+                        fontWeight = FontWeight.Bold
                     ),
                     modifier = Modifier.padding(bottom = 16.dp)
                 )
@@ -81,7 +81,7 @@ fun MenuScreen(navController: NavController) {
                 // Segunda linha de botões
                 Row(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceEvenly // Para distribuir os botões igualmente
+                    horizontalArrangement = Arrangement.SpaceEvenly
                 ) {
                     Button(
                         onClick = { navController.navigate(Screen.AlterarProduto.route) },
@@ -106,11 +106,11 @@ fun MenuScreen(navController: NavController) {
 
                 Spacer(modifier = Modifier.height(32.dp)) // Espaçamento entre os botões e a imagem
                 Image(
-                    painter = painterResource(id = R.drawable.market), // Substitua 'logo' pelo nome do seu arquivo de imagem
-                    contentDescription = "Market", // Descrição alternativa da imagem
+                    painter = painterResource(id = R.drawable.market),
+                    contentDescription = "Market",
                     modifier = Modifier
-                        .size(150.dp)  // Ajuste o tamanho da imagem conforme necessário
-                        .padding(top = 16.dp)  // Padding opcional para ajustar a posição
+                        .size(150.dp)
+                        .padding(top = 16.dp)
                 )
             }
         }

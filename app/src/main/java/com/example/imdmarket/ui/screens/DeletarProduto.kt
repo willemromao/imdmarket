@@ -30,13 +30,13 @@ fun DeletarProdutoScreen(navController: NavController) {
             TopAppBar(
                 title = {
                     Text(
-                        text = "IMD Market",  // Nome da aplicação
-                        color = Color.White,  // Cor do texto
+                        text = "IMD Market",
+                        color = Color.White,
                         fontWeight = FontWeight.Bold
                     )
                 },
                 colors = TopAppBarDefaults.mediumTopAppBarColors(
-                    containerColor = Color(0xFF0F3C8D)  // Cor de fundo da barra
+                    containerColor = Color(0xFF0F3C8D)
                 )
             )
         },
@@ -49,11 +49,11 @@ fun DeletarProdutoScreen(navController: NavController) {
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Top
             ) {
-                // Texto "DELETAR PRODUTO"
+
                 Text(
-                    text = "DELETAR PRODUTO",  // Título da tela
-                    fontSize = 24.sp,  // Tamanho da fonte
-                    fontWeight = FontWeight.Bold,  // Deixa o texto mais grosso
+                    text = "DELETAR PRODUTO",
+                    fontSize = 24.sp,
+                    fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(bottom = 16.dp)
                 )
 
