@@ -4,6 +4,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.*
+import com.example.imdmarket.ui.screens.AlterarProdutoScreen
 import com.example.imdmarket.ui.screens.LoginScreen
 import com.example.imdmarket.ui.screens.MenuScreen
 import com.example.imdmarket.ui.screens.CadastroProdutoScreen
@@ -28,6 +29,11 @@ fun Navigation(navController: NavHostController) {
         composable(route = Screen.CadastroProduto.route) {
             CadastroProdutoScreen(navController = navController)
         }
+
+        composable(route = Screen.AlterarProduto.route) {
+            AlterarProdutoScreen(navController = navController)
+        }
+
     }
 }
 
@@ -35,4 +41,5 @@ sealed class Screen(val route: String) {
     object Login : Screen("login")
     object Menu : Screen("menu")
     object CadastroProduto : Screen("cadastro_produto")
+    object AlterarProduto : Screen("alterar_produto")
 }

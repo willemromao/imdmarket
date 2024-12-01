@@ -84,7 +84,7 @@ fun MenuScreen(navController: NavController) {
                     horizontalArrangement = Arrangement.SpaceEvenly // Para distribuir os botões igualmente
                 ) {
                     Button(
-                        onClick = { /* Lógica para alterar produto */ },
+                        onClick = { navController.navigate(Screen.AlterarProduto.route) },
                         modifier = Modifier.width(150.dp).padding(8.dp)
                     ) {
                         Text(
