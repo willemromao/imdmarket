@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.imdmarket.viewmodel.LoginViewModel
@@ -37,7 +38,9 @@ fun LoginScreen(
                     Text(
                         text = "IMD Market",  // Nome da aplicação
                         color = Color.White,  // Cor do texto
-                        fontWeight = FontWeight.Bold
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.fillMaxWidth(),
+                        textAlign = TextAlign.Center
                     )
                 },
                 colors = TopAppBarDefaults.mediumTopAppBarColors(
@@ -101,7 +104,7 @@ fun LoginScreen(
                     onClick = { /* Lógica para recuperação de senha */ },
                     modifier = Modifier.padding(top = 8.dp)
                 ) {
-                    Text("Esqueceu sua senha ou login?")
+                    Text("Esqueci minha senha/login")
                 }
             }
         }

@@ -9,11 +9,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.example.imdmarket.R
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -61,14 +60,20 @@ fun MenuScreen(navController: NavController) {
                         onClick = { /* Lógica para cadastrar produto */ },
                         modifier = Modifier.width(150.dp).padding(8.dp)
                     ) {
-                        Text("Cadastrar produto")
+                        Text(
+                            text = "Cadastrar produto",
+                            textAlign = TextAlign.Center
+                        )
                     }
 
                     Button(
                         onClick = { /* Lógica para listar produtos */ },
                         modifier = Modifier.width(150.dp).padding(8.dp)
                     ) {
-                        Text("Listar produtos")
+                        Text(
+                            text = "Listar produtos",
+                            textAlign = TextAlign.Center
+                        )
                     }
                 }
 
@@ -81,14 +86,20 @@ fun MenuScreen(navController: NavController) {
                         onClick = { /* Lógica para alterar produto */ },
                         modifier = Modifier.width(150.dp).padding(8.dp)
                     ) {
-                        Text("Alterar produto")
+                        Text(
+                            text = "Alterar produto",
+                            textAlign = TextAlign.Center
+                        )
                     }
 
                     Button(
                         onClick = { /* Lógica para deletar produto */ },
                         modifier = Modifier.width(150.dp).padding(8.dp)
                     ) {
-                        Text("Deletar produto")
+                        Text(
+                            text = "Deletar produto",
+                            textAlign = TextAlign.Center
+                        )
                     }
                 }
 
@@ -103,11 +114,4 @@ fun MenuScreen(navController: NavController) {
             }
         }
     )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun PreviewMenuScreen() {
-    // Para o preview, você pode passar um controller falso, já que ele não será usado no preview
-    MenuScreen(navController = rememberNavController())
 }
