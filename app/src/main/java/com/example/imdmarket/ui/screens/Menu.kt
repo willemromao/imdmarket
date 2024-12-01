@@ -14,6 +14,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.imdmarket.R
+import com.example.imdmarket.navigation.Screen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -57,7 +58,7 @@ fun MenuScreen(navController: NavController) {
                     horizontalArrangement = Arrangement.SpaceEvenly // Para distribuir os botões igualmente
                 ) {
                     Button(
-                        onClick = { /* Lógica para cadastrar produto */ },
+                        onClick = {navController.navigate(Screen.CadastroProduto.route) },
                         modifier = Modifier.width(150.dp).padding(8.dp)
                     ) {
                         Text(
