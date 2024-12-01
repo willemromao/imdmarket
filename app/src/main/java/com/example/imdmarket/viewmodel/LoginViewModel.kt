@@ -1,23 +1,21 @@
 package com.example.imdmarket.viewmodel
 
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.launch
+import androidx.navigation.NavController
 
 class LoginViewModel : ViewModel() {
 
-    fun login(username: String, password: String, onLoginSuccess: () -> Unit, onLoginFailure: (String) -> Unit) {
-        viewModelScope.launch {
-            // Lógica para autenticar o usuário
-            if (username == "admin" && password == "admin") {
-                onLoginSuccess()
-            } else {
-                onLoginFailure("Login ou senha inválidos")
-            }
-        }
-    }
+    var username = mutableStateOf("")
+    var password = mutableStateOf("")
 
-    fun forgotPassword() {
-        // Lógica para recuperação de senha
+    // Método de login
+    fun login(navController: NavController) {
+        // Verifica se o usuário e senha são 'admin' para navegar para o menu
+        if (username.value == "admin" && password.value == "admin") {
+            navController.navigate("menu") // Navega para o menu
+        } else {
+            // Exemplo de lógica para lidar com erro de login (alerta ou mensagem de erro)
+        }
     }
 }

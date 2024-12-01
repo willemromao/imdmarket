@@ -3,33 +3,32 @@ package com.example.imdmarket
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
-import com.example.imdmarket.ui.login.LoginScreen
-import com.example.imdmarket.viewmodel.LoginViewModel
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.*
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.navigation.compose.rememberNavController
+import com.example.imdmarket.navigation.Navigation
 import com.example.imdmarket.ui.theme.IMDMarketTheme
 
 class MainActivity : ComponentActivity() {
-    private val loginViewModel: LoginViewModel by viewModels()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            App()
+        }
+    }
+}
 
-            IMDMarketTheme {
-                LoginScreen(
-                    onLoginClick = { username, password ->
-                        loginViewModel.login(username, password,
-                            onLoginSuccess = { /* Navegar para a próxima tela */ },
-                            onLoginFailure = { errorMessage ->
-                                // Exibir mensagem de erro, como um Toast
-                            }
-                        )
-                    },
-                    onForgotPasswordClick = {
-                        loginViewModel.forgotPassword()
-                    }
-                )
-            }
+@Composable
+fun App() {
+    val navController = rememberNavController()
+
+    IMDMarketTheme {
+        Scaffold(
+            modifier = Modifier.fillMaxSize()
+        ) {
+            Navigation(navController = navController)
         }
     }
 }
