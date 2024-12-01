@@ -94,7 +94,7 @@ fun MenuScreen(navController: NavController) {
                     }
 
                     Button(
-                        onClick = { /* Lógica para deletar produto */ },
+                        onClick = { navController.navigate(Screen.DeletarProduto.route) },
                         modifier = Modifier.width(150.dp).padding(8.dp)
                     ) {
                         Text(

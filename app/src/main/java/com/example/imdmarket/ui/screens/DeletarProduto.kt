@@ -18,12 +18,9 @@ import com.example.imdmarket.navigation.Screen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AlterarProdutoScreen(navController: NavController) {
-    // Estados dos campos de texto
+fun DeletarProdutoScreen(navController: NavController) {
+    // Estado do campo de código do produto
     var codigo by remember { mutableStateOf("") }
-    var nome by remember { mutableStateOf("") }
-    var descricao by remember { mutableStateOf("") }
-    var estoque by remember { mutableStateOf("") }
 
     // Contexto para o Toast
     val context = LocalContext.current
@@ -52,9 +49,9 @@ fun AlterarProdutoScreen(navController: NavController) {
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Top
             ) {
-                // Texto "ALTERAR PRODUTO"
+                // Texto "DELETAR PRODUTO"
                 Text(
-                    text = "ALTERAR PRODUTO",  // Título da tela
+                    text = "DELETAR PRODUTO",  // Título da tela
                     fontSize = 24.sp,  // Tamanho da fonte
                     fontWeight = FontWeight.Bold,  // Deixa o texto mais grosso
                     modifier = Modifier.padding(bottom = 16.dp)
@@ -71,43 +68,12 @@ fun AlterarProdutoScreen(navController: NavController) {
                     )
                 )
 
-                // Campo Nome do Produto (Opcional)
-                OutlinedTextField(
-                    value = nome,
-                    onValueChange = { nome = it },
-                    label = { Text("Nome do produto") },
-                    modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp)
-                )
-
-                // Campo Descrição do Produto (Opcional)
-                OutlinedTextField(
-                    value = descricao,
-                    onValueChange = { descricao = it },
-                    label = { Text("Descrição do produto") },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(150.dp)
-                        .padding(vertical = 8.dp),
-                    maxLines = 5
-                )
-
-                // Campo Estoque (Opcional)
-                OutlinedTextField(
-                    value = estoque,
-                    onValueChange = { estoque = it },
-                    label = { Text("Estoque") },
-                    modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
-                    keyboardOptions = KeyboardOptions.Default.copy(
-                        keyboardType = KeyboardType.Number // Apenas números
-                    )
-                )
-
                 Spacer(modifier = Modifier.height(16.dp))
 
-                // Botão Salvar
+                // Botão Deletar
                 Button(
                     onClick = {
-                        // Validação dos campos
+                        // Validação do código
                         if (codigo.isEmpty()) {
                             Toast.makeText(
                                 context,
@@ -117,7 +83,7 @@ fun AlterarProdutoScreen(navController: NavController) {
                         } else {
                             Toast.makeText(
                                 context,
-                                "Produto alterado com sucesso!",
+                                "Produto deletado com sucesso!",
                                 Toast.LENGTH_SHORT
                             ).show()
                             navController.navigate(Screen.Menu.route)
@@ -125,7 +91,7 @@ fun AlterarProdutoScreen(navController: NavController) {
                     },
                     modifier = Modifier.width(125.dp).padding(vertical = 8.dp)
                 ) {
-                    Text("Alterar")
+                    Text("Deletar")
                 }
             }
         }

@@ -8,6 +8,7 @@ import com.example.imdmarket.ui.screens.AlterarProdutoScreen
 import com.example.imdmarket.ui.screens.LoginScreen
 import com.example.imdmarket.ui.screens.MenuScreen
 import com.example.imdmarket.ui.screens.CadastroProdutoScreen
+import com.example.imdmarket.ui.screens.DeletarProdutoScreen
 import com.example.imdmarket.viewmodel.LoginViewModel
 
 
@@ -34,6 +35,10 @@ fun Navigation(navController: NavHostController) {
             AlterarProdutoScreen(navController = navController)
         }
 
+        composable(route = Screen.DeletarProduto.route) {
+            DeletarProdutoScreen(navController = navController)
+        }
+
     }
 }
 
@@ -42,4 +47,6 @@ sealed class Screen(val route: String) {
     object Menu : Screen("menu")
     object CadastroProduto : Screen("cadastro_produto")
     object AlterarProduto : Screen("alterar_produto")
+    object DeletarProduto : Screen("deletar_produto")
+
 }
