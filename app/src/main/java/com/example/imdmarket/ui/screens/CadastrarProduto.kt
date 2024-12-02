@@ -103,28 +103,47 @@ fun CadastroProdutoScreen(navController: NavController) {
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                // Botão Salvar
-                Button(
-                    onClick = {
-                        // Validação dos campos
-                        if (codigo.isEmpty() || nome.isEmpty() || descricao.isEmpty() || estoque.isEmpty()) {
-                            Toast.makeText(
-                                context,
-                                "Por favor, preencha todos os campos.",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        } else {
-                            Toast.makeText(
-                                context,
-                                "Produto cadastrado com sucesso!",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                            navController.navigate(Screen.Menu.route)
-                        }
-                    },
-                    modifier = Modifier.width(125.dp).padding(vertical = 8.dp)
+                // Botões "Salvar" e "Limpar"
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
-                    Text("Salvar")
+                    // Botão Salvar
+                    Button(
+                        onClick = {
+                            // Validação dos campos
+                            if (codigo.isEmpty() || nome.isEmpty() || descricao.isEmpty() || estoque.isEmpty()) {
+                                Toast.makeText(
+                                    context,
+                                    "Por favor, preencha todos os campos.",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            } else {
+                                Toast.makeText(
+                                    context,
+                                    "Produto cadastrado com sucesso!",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                navController.navigate(Screen.Menu.route)
+                            }
+                        },
+                        modifier = Modifier.width(125.dp).padding(vertical = 8.dp)
+                    ) {
+                        Text("Salvar")
+                    }
+
+                    // Botão Limpar
+                    Button(
+                        onClick = {
+                            // Limpa os campos
+                            codigo = ""
+                            nome = ""
+                            descricao = ""
+                            estoque = ""
+                        },
+                        modifier = Modifier.width(125.dp).padding(vertical = 8.dp)
+                    ) {
+                        Text("Limpar")
+                    }
                 }
             }
         }

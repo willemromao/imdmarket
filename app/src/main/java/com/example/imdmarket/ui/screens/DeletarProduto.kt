@@ -70,28 +70,44 @@ fun DeletarProdutoScreen(navController: NavController) {
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                // Botão Deletar
-                Button(
-                    onClick = {
-                        // Validação do código
-                        if (codigo.isEmpty()) {
-                            Toast.makeText(
-                                context,
-                                "Por favor, preencha o código do produto.",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        } else {
-                            Toast.makeText(
-                                context,
-                                "Produto deletado com sucesso!",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                            navController.navigate(Screen.Menu.route)
-                        }
-                    },
-                    modifier = Modifier.width(125.dp).padding(vertical = 8.dp)
+                // Botões Deletar e Limpar
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
-                    Text("Deletar")
+                    // Botão Deletar
+                    Button(
+                        onClick = {
+                            // Validação do código
+                            if (codigo.isEmpty()) {
+                                Toast.makeText(
+                                    context,
+                                    "Por favor, preencha o código do produto.",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            } else {
+                                Toast.makeText(
+                                    context,
+                                    "Produto deletado com sucesso!",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                navController.navigate(Screen.Menu.route)
+                            }
+                        },
+                        modifier = Modifier.width(125.dp).padding(vertical = 8.dp)
+                    ) {
+                        Text("Deletar")
+                    }
+
+                    // Botão Limpar
+                    Button(
+                        onClick = {
+                            // Limpa o campo de código do produto
+                            codigo = ""
+                        },
+                        modifier = Modifier.width(125.dp).padding(vertical = 8.dp)
+                    ) {
+                        Text("Limpar")
+                    }
                 }
             }
         }

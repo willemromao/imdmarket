@@ -103,30 +103,50 @@ fun AlterarProdutoScreen(navController: NavController) {
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                // Botão Salvar
-                Button(
-                    onClick = {
-                        // Validação dos campos
-                        if (codigo.isEmpty()) {
-                            Toast.makeText(
-                                context,
-                                "Por favor, preencha o código do produto.",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        } else {
-                            Toast.makeText(
-                                context,
-                                "Produto alterado com sucesso!",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                            navController.navigate(Screen.Menu.route)
-                        }
-                    },
-                    modifier = Modifier.width(125.dp).padding(vertical = 8.dp)
+                // Botões "Alterar" e "Limpar"
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
-                    Text("Alterar")
+                    // Botão Alterar
+                    Button(
+                        onClick = {
+                            // Validação dos campos
+                            if (codigo.isEmpty()) {
+                                Toast.makeText(
+                                    context,
+                                    "Por favor, preencha o código do produto.",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            } else {
+                                Toast.makeText(
+                                    context,
+                                    "Produto alterado com sucesso!",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                navController.navigate(Screen.Menu.route)
+                            }
+                        },
+                        modifier = Modifier.width(125.dp).padding(vertical = 8.dp)
+                    ) {
+                        Text("Alterar")
+                    }
+
+                    // Botão Limpar
+                    Button(
+                        onClick = {
+                            // Limpa os campos
+                            codigo = ""
+                            nome = ""
+                            descricao = ""
+                            estoque = ""
+                        },
+                        modifier = Modifier.width(125.dp).padding(vertical = 8.dp)
+                    ) {
+                        Text("Limpar")
+                    }
                 }
             }
         }
     )
 }
+

@@ -12,6 +12,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.imdmarket.navigation.Screen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -59,15 +60,29 @@ fun ListarProdutosScreen(navController: NavController) {
                 )
 
                 // Lista de Produtos
-                LazyColumn {
+                LazyColumn(
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .weight(1f)
+                ) {
                     items(produtos) { produto ->
                         ProdutoItem(produto)
                     }
                 }
 
-                Spacer(modifier = Modifier.height(16.dp))
+                // Spacer para empurrar o botão para o final
+                Spacer(modifier = Modifier.weight(0.005f))
 
-
+                // Botão Voltar
+                Button(
+                    onClick = {
+                        navController.navigate(Screen.Menu.route) // Volta para o menu
+                    },
+                    modifier =
+                        Modifier.width(125.dp).padding(vertical = 8.dp)
+                ) {
+                    Text("Voltar")
+                }
             }
         }
     )
@@ -103,3 +118,4 @@ data class Produto(
     val descricao: String,
     val estoque: Int
 )
+
