@@ -15,14 +15,16 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.imdmarket.navigation.Screen
+import com.example.imdmarket.viewmodel.ProdutoViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DeletarProdutoScreen(navController: NavController) {
-    // Estado do campo de código do produto
+fun DeletarProdutoScreen(
+    navController: NavController,
+    produtoViewModel: ProdutoViewModel
+) {
     var codigo by remember { mutableStateOf("") }
 
-    // Contexto para o Toast
     val context = LocalContext.current
 
     Scaffold(
@@ -57,54 +59,64 @@ fun DeletarProdutoScreen(navController: NavController) {
                     modifier = Modifier.padding(bottom = 16.dp)
                 )
 
-                // Campo Código do Produto (Obrigatório)
                 OutlinedTextField(
                     value = codigo,
                     onValueChange = { codigo = it },
                     label = { Text("Código do produto") },
-                    modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 8.dp),
                     keyboardOptions = KeyboardOptions.Default.copy(
-                        keyboardType = KeyboardType.Number // Apenas números
+                        keyboardType = KeyboardType.Number
                     )
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                // Botões Deletar e Limpar
                 Row(
                     horizontalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
-                    // Botão Deletar
                     Button(
                         onClick = {
-                            // Validação do código
                             if (codigo.isEmpty()) {
                                 Toast.makeText(
                                     context,
                                     "Por favor, preencha o código do produto.",
                                     Toast.LENGTH_SHORT
                                 ).show()
-                            } else {
+                                return@Button
+                            }
+
+                            val sucesso = produtoViewModel.deletarProduto(codigo)
+                            if (sucesso) {
                                 Toast.makeText(
                                     context,
                                     "Produto deletado com sucesso!",
                                     Toast.LENGTH_SHORT
                                 ).show()
                                 navController.navigate(Screen.Menu.route)
+                            } else {
+                                Toast.makeText(
+                                    context,
+                                    "Produto não encontrado.",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
                         },
-                        modifier = Modifier.width(125.dp).padding(vertical = 8.dp)
+                        modifier = Modifier
+                            .width(125.dp)
+                            .padding(vertical = 8.dp)
                     ) {
                         Text("Deletar")
                     }
 
-                    // Botão Limpar
                     Button(
                         onClick = {
-                            // Limpa o campo de código do produto
                             codigo = ""
                         },
-                        modifier = Modifier.width(125.dp).padding(vertical = 8.dp)
+                        modifier = Modifier
+                            .width(125.dp)
+                            .padding(vertical = 8.dp)
                     ) {
                         Text("Limpar")
                     }

@@ -1,27 +1,26 @@
 package com.example.imdmarket.navigation
 
-import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.*
-import com.example.imdmarket.ui.screens.AlterarProdutoScreen
-import com.example.imdmarket.ui.screens.LoginScreen
-import com.example.imdmarket.ui.screens.MenuScreen
-import com.example.imdmarket.ui.screens.CadastroProdutoScreen
-import com.example.imdmarket.ui.screens.DeletarProdutoScreen
-import com.example.imdmarket.ui.screens.ListarProdutosScreen
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import com.example.imdmarket.ui.screens.*
 import com.example.imdmarket.viewmodel.LoginViewModel
-
+import com.example.imdmarket.viewmodel.ProdutoViewModel
 
 @Composable
-fun Navigation(navController: NavHostController) {
+fun Navigation(
+    navController: NavHostController,
+    produtoViewModel: ProdutoViewModel
+) {
     NavHost(
         navController = navController,
-        startDestination = Screen.Login.route // Tela inicial
+        startDestination = Screen.Login.route
     ) {
         composable(route = Screen.Login.route) {
-            // Passando o ViewModel para a LoginScreen
-            LoginScreen(navController = navController, viewModel = LoginViewModel())
+            val loginViewModel: LoginViewModel = viewModel()
+            LoginScreen(navController = navController, viewModel = loginViewModel)
         }
 
         composable(route = Screen.Menu.route) {
@@ -29,21 +28,20 @@ fun Navigation(navController: NavHostController) {
         }
 
         composable(route = Screen.CadastroProduto.route) {
-            CadastroProdutoScreen(navController = navController)
+            CadastroProdutoScreen(navController = navController, produtoViewModel = produtoViewModel)
         }
 
         composable(route = Screen.AlterarProduto.route) {
-            AlterarProdutoScreen(navController = navController)
+            AlterarProdutoScreen(navController = navController, produtoViewModel = produtoViewModel)
         }
 
         composable(route = Screen.DeletarProduto.route) {
-            DeletarProdutoScreen(navController = navController)
+            DeletarProdutoScreen(navController = navController, produtoViewModel = produtoViewModel)
         }
 
         composable(route = Screen.ListarProdutos.route) {
-            ListarProdutosScreen(navController = navController)
+            ListarProdutosScreen(navController = navController, produtoViewModel = produtoViewModel)
         }
-
     }
 }
 
@@ -54,5 +52,4 @@ sealed class Screen(val route: String) {
     object AlterarProduto : Screen("alterar_produto")
     object DeletarProduto : Screen("deletar_produto")
     object ListarProdutos : Screen("listar_produtos")
-
 }

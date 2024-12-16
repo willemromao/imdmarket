@@ -9,12 +9,11 @@ class LoginViewModel : ViewModel() {
     var username = mutableStateOf("")
     var password = mutableStateOf("")
 
-    // Método de login
     fun login(navController: NavController) {
         if (username.value == "admin" && password.value == "admin") {
-            navController.navigate("menu") // Navega para o menu
+            navController.navigate("menu")
         } else {
-            // Lógica para lidar com erro de login (alerta ou mensagem de erro)
+            // Lógica erro de login
         }
     }
 }

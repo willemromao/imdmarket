@@ -23,11 +23,9 @@ fun LoginScreen(
     navController: NavController,
     viewModel: LoginViewModel
 ) {
-    // Usando o estado do ViewModel
     var username by remember { mutableStateOf(viewModel.username.value) }
     var password by remember { mutableStateOf(viewModel.password.value) }
 
-    // Atualiza os valores no ViewModel conforme o usuário digita
     viewModel.username.value = username
     viewModel.password.value = password
 
@@ -57,7 +55,6 @@ fun LoginScreen(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
-                // Campo para Login
                 TextField(
                     value = username,
                     onValueChange = { username = it },
@@ -72,7 +69,6 @@ fun LoginScreen(
                     )
                 )
 
-                // Campo para Senha
                 TextField(
                     value = password,
                     onValueChange = { password = it },
@@ -88,10 +84,8 @@ fun LoginScreen(
                     )
                 )
 
-                // Botão Entrar
                 Button(
                     onClick = {
-                        // Realiza o login através do ViewModel
                         viewModel.login(navController)
                     },
                     modifier = Modifier.width(125.dp).padding(8.dp)
@@ -99,7 +93,6 @@ fun LoginScreen(
                     Text("Entrar")
                 }
 
-                // Link para recuperação de senha
                 TextButton(
                     onClick = { /* Lógica para recuperação de senha */ },
                     modifier = Modifier.padding(top = 8.dp)

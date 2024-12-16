@@ -52,7 +52,6 @@ fun MenuScreen(navController: NavController) {
                     modifier = Modifier.padding(bottom = 16.dp)
                 )
 
-                // Primeira linha de botões
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceEvenly // Para distribuir os botões igualmente
@@ -78,7 +77,6 @@ fun MenuScreen(navController: NavController) {
                     }
                 }
 
-                // Segunda linha de botões
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceEvenly
@@ -104,7 +102,7 @@ fun MenuScreen(navController: NavController) {
                     }
                 }
 
-                Spacer(modifier = Modifier.height(32.dp)) // Espaçamento entre os botões e a imagem
+                Spacer(modifier = Modifier.height(32.dp))
                 Image(
                     painter = painterResource(id = R.drawable.market),
                     contentDescription = "Market",

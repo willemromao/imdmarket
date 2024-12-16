@@ -4,7 +4,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -12,21 +12,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.imdmarket.models.Produto
 import com.example.imdmarket.navigation.Screen
+import com.example.imdmarket.viewmodel.ProdutoViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ListarProdutosScreen(navController: NavController) {
-    // Exemplo de lista de produtos
-    val produtos = listOf(
-        Produto("001", "Produto A", "Descrição do produto A", 10),
-        Produto("002", "Produto B", "Descrição do produto B", 20),
-        Produto("003", "Produto C", "Descrição do produto C", 15),
-        Produto("004", "Produto D", "Descrição do produto D", 35),
-        Produto("005", "Produto E", "Descrição do produto E", 25),
-        Produto("006", "Produto F", "Descrição do produto F", 60),
-        Produto("007", "Produto G", "Descrição do produto G", 40)
-    )
+fun ListarProdutosScreen(navController: NavController, produtoViewModel: ProdutoViewModel) {
+    val produtos by produtoViewModel.produtos
 
     Scaffold(
         topBar = {
@@ -59,27 +52,33 @@ fun ListarProdutosScreen(navController: NavController) {
                     modifier = Modifier.padding(bottom = 16.dp)
                 )
 
-                // Lista de Produtos
-                LazyColumn(
-                    modifier = Modifier
-                        .fillMaxHeight()
-                        .weight(1f)
-                ) {
-                    items(produtos) { produto ->
-                        ProdutoItem(produto)
+                if (produtos.isEmpty()) {
+                    Text(
+                        text = "Nenhum produto encontrado.",
+                        color = Color.Gray,
+                        modifier = Modifier.padding(16.dp)
+                    )
+                } else {
+                    LazyColumn(
+                        modifier = Modifier
+                            .fillMaxHeight()
+                            .weight(1f)
+                    ) {
+                        items(produtos) { produto ->
+                            ProdutoItem(produto)
+                        }
                     }
                 }
 
-                // Spacer para empurrar o botão para o final
                 Spacer(modifier = Modifier.weight(0.005f))
 
-                // Botão Voltar
                 Button(
                     onClick = {
-                        navController.navigate(Screen.Menu.route) // Volta para o menu
+                        navController.navigate(Screen.Menu.route)
                     },
-                    modifier =
-                        Modifier.width(125.dp).padding(vertical = 8.dp)
+                    modifier = Modifier
+                        .width(125.dp)
+                        .padding(vertical = 8.dp)
                 ) {
                     Text("Voltar")
                 }
@@ -88,7 +87,6 @@ fun ListarProdutosScreen(navController: NavController) {
     )
 }
 
-// Componente para exibir um produto
 @Composable
 fun ProdutoItem(produto: Produto) {
     Card(
@@ -102,20 +100,12 @@ fun ProdutoItem(produto: Produto) {
             modifier = Modifier.padding(16.dp)
         ) {
             Text(
-                text = "Código: ${produto.codigo}",
+                text = "Código: ${produto.codigoProduto}",
                 fontWeight = FontWeight.Bold
             )
-            Text("Nome: ${produto.nome}")
-            Text("Descrição: ${produto.descricao}")
+            Text("Nome: ${produto.nomeProduto}")
+            Text("Descrição: ${produto.descricaoProduto}")
             Text("Estoque: ${produto.estoque}")
         }
     }
 }
-
-data class Produto(
-    val codigo: String,
-    val nome: String,
-    val descricao: String,
-    val estoque: Int
-)
-

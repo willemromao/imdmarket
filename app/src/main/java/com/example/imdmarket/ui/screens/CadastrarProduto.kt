@@ -14,18 +14,21 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.imdmarket.models.Produto
 import com.example.imdmarket.navigation.Screen
+import com.example.imdmarket.viewmodel.ProdutoViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CadastroProdutoScreen(navController: NavController) {
-    // Estados dos campos de texto
+fun CadastroProdutoScreen(
+    navController: NavController,
+    produtoViewModel: ProdutoViewModel
+) {
     var codigo by remember { mutableStateOf("") }
     var nome by remember { mutableStateOf("") }
     var descricao by remember { mutableStateOf("") }
     var estoque by remember { mutableStateOf("") }
 
-    // Contexto para o Toast
     val context = LocalContext.current
 
     Scaffold(
@@ -59,26 +62,27 @@ fun CadastroProdutoScreen(navController: NavController) {
                     modifier = Modifier.padding(bottom = 16.dp)
                 )
 
-                // Campo Código do Produto
                 OutlinedTextField(
                     value = codigo,
                     onValueChange = { codigo = it },
                     label = { Text("Código do produto") },
-                    modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 8.dp),
                     keyboardOptions = KeyboardOptions.Default.copy(
-                        keyboardType = KeyboardType.Number // Apenas números
+                        keyboardType = KeyboardType.Number
                     )
                 )
 
-                // Campo Nome do Produto
                 OutlinedTextField(
                     value = nome,
                     onValueChange = { nome = it },
                     label = { Text("Nome do produto") },
-                    modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp)
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 8.dp)
                 )
 
-                // Campo Descrição do Produto
                 OutlinedTextField(
                     value = descricao,
                     onValueChange = { descricao = it },
@@ -90,57 +94,84 @@ fun CadastroProdutoScreen(navController: NavController) {
                     maxLines = 5
                 )
 
-                // Campo Estoque
                 OutlinedTextField(
                     value = estoque,
                     onValueChange = { estoque = it },
                     label = { Text("Estoque") },
-                    modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 8.dp),
                     keyboardOptions = KeyboardOptions.Default.copy(
-                        keyboardType = KeyboardType.Number // Apenas números
+                        keyboardType = KeyboardType.Number
                     )
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                // Botões "Salvar" e "Limpar"
                 Row(
                     horizontalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
-                    // Botão Salvar
                     Button(
                         onClick = {
-                            // Validação dos campos
                             if (codigo.isEmpty() || nome.isEmpty() || descricao.isEmpty() || estoque.isEmpty()) {
                                 Toast.makeText(
                                     context,
                                     "Por favor, preencha todos os campos.",
                                     Toast.LENGTH_SHORT
                                 ).show()
-                            } else {
+                                return@Button
+                            }
+
+                            val estoqueInt = estoque.toIntOrNull()
+                            if (estoqueInt == null || estoqueInt < 0) {
+                                Toast.makeText(
+                                    context,
+                                    "Por favor, insira um valor numérico válido para o estoque.",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                return@Button
+                            }
+
+                            val novoProduto = Produto(
+                                codigoProduto = codigo,
+                                nomeProduto = nome,
+                                descricaoProduto = descricao,
+                                estoque = estoqueInt
+                            )
+
+                            val sucesso = produtoViewModel.adicionarProduto(novoProduto)
+                            if (sucesso) {
                                 Toast.makeText(
                                     context,
                                     "Produto cadastrado com sucesso!",
                                     Toast.LENGTH_SHORT
                                 ).show()
                                 navController.navigate(Screen.Menu.route)
+                            } else {
+                                Toast.makeText(
+                                    context,
+                                    "Produto já existe!",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
                         },
-                        modifier = Modifier.width(125.dp).padding(vertical = 8.dp)
+                        modifier = Modifier
+                            .width(125.dp)
+                            .padding(vertical = 8.dp)
                     ) {
                         Text("Salvar")
                     }
 
-                    // Botão Limpar
                     Button(
                         onClick = {
-                            // Limpa os campos
                             codigo = ""
                             nome = ""
                             descricao = ""
                             estoque = ""
                         },
-                        modifier = Modifier.width(125.dp).padding(vertical = 8.dp)
+                        modifier = Modifier
+                            .width(125.dp)
+                            .padding(vertical = 8.dp)
                     ) {
                         Text("Limpar")
                     }
