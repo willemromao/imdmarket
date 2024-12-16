@@ -67,7 +67,7 @@ fun DeletarProdutoScreen(
                         .fillMaxWidth()
                         .padding(vertical = 8.dp),
                     keyboardOptions = KeyboardOptions.Default.copy(
-                        keyboardType = KeyboardType.Number
+                        keyboardType = KeyboardType.Text
                     )
                 )
 
@@ -87,7 +87,7 @@ fun DeletarProdutoScreen(
                                 return@Button
                             }
 
-                            val sucesso = produtoViewModel.deletarProduto(codigo)
+                            val sucesso = produtoViewModel.deletarProdutoPorCodigo(codigo)
                             if (sucesso) {
                                 Toast.makeText(
                                     context,

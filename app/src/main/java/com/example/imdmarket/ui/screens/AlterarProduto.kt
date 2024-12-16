@@ -70,7 +70,7 @@ fun AlterarProdutoScreen(
                         .fillMaxWidth()
                         .padding(vertical = 8.dp),
                     keyboardOptions = KeyboardOptions.Default.copy(
-                        keyboardType = KeyboardType.Number
+                        keyboardType = KeyboardType.Text
                     )
                 )
 
@@ -78,8 +78,8 @@ fun AlterarProdutoScreen(
                     onClick = {
                         val produto = produtoViewModel.buscarProdutoPorCodigo(codigo)
                         if (produto != null) {
-                            nome = produto.nomeProduto
-                            descricao = produto.descricaoProduto
+                            nome = produto.nome
+                            descricao = produto.descricao
                             estoque = produto.estoque.toString()
                             Toast.makeText(context, "Produto carregado com sucesso!", Toast.LENGTH_SHORT).show()
                         } else {
@@ -152,9 +152,10 @@ fun AlterarProdutoScreen(
                             }
 
                             val produtoAlterado = Produto(
-                                codigoProduto = codigo,
-                                nomeProduto = nome,
-                                descricaoProduto = descricao,
+                                id = null,
+                                codigo = codigo,
+                                nome = nome,
+                                descricao = descricao,
                                 estoque = estoqueInt
                             )
 
@@ -200,4 +201,3 @@ fun AlterarProdutoScreen(
         }
     )
 }
-

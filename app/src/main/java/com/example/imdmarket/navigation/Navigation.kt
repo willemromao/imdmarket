@@ -18,33 +18,30 @@ fun Navigation(
         navController = navController,
         startDestination = Screen.Login.route
     ) {
-        composable(route = Screen.Login.route) {
+        composable(Screen.Login.route) {
+            // Cria ou obtém o LoginViewModel usando viewModel()
             val loginViewModel: LoginViewModel = viewModel()
             LoginScreen(navController = navController, viewModel = loginViewModel)
         }
-
-        composable(route = Screen.Menu.route) {
+        composable(Screen.Menu.route) {
             MenuScreen(navController = navController)
         }
-
-        composable(route = Screen.CadastroProduto.route) {
+        composable(Screen.CadastroProduto.route) {
             CadastroProdutoScreen(navController = navController, produtoViewModel = produtoViewModel)
         }
-
-        composable(route = Screen.AlterarProduto.route) {
+        composable(Screen.AlterarProduto.route) {
             AlterarProdutoScreen(navController = navController, produtoViewModel = produtoViewModel)
         }
-
-        composable(route = Screen.DeletarProduto.route) {
+        composable(Screen.DeletarProduto.route) {
             DeletarProdutoScreen(navController = navController, produtoViewModel = produtoViewModel)
         }
-
-        composable(route = Screen.ListarProdutos.route) {
+        composable(Screen.ListarProdutos.route) {
             ListarProdutosScreen(navController = navController, produtoViewModel = produtoViewModel)
         }
     }
 }
 
+// Classes para definir as rotas do aplicativo
 sealed class Screen(val route: String) {
     object Login : Screen("login")
     object Menu : Screen("menu")

@@ -70,7 +70,7 @@ fun CadastroProdutoScreen(
                         .fillMaxWidth()
                         .padding(vertical = 8.dp),
                     keyboardOptions = KeyboardOptions.Default.copy(
-                        keyboardType = KeyboardType.Number
+                        keyboardType = KeyboardType.Text
                     )
                 )
 
@@ -133,9 +133,10 @@ fun CadastroProdutoScreen(
                             }
 
                             val novoProduto = Produto(
-                                codigoProduto = codigo,
-                                nomeProduto = nome,
-                                descricaoProduto = descricao,
+                                id = null, // ID será gerado automaticamente no SQLite
+                                codigo = codigo,
+                                nome = nome,
+                                descricao = descricao,
                                 estoque = estoqueInt
                             )
 
@@ -150,7 +151,7 @@ fun CadastroProdutoScreen(
                             } else {
                                 Toast.makeText(
                                     context,
-                                    "Produto já existe!",
+                                    "Erro ao cadastrar o produto. Tente novamente!",
                                     Toast.LENGTH_SHORT
                                 ).show()
                             }

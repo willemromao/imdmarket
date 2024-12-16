@@ -19,7 +19,8 @@ import com.example.imdmarket.viewmodel.ProdutoViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ListarProdutosScreen(navController: NavController, produtoViewModel: ProdutoViewModel) {
-    val produtos by produtoViewModel.produtos
+    // Carregar os produtos do banco de dados
+    val produtos by produtoViewModel.produtos.collectAsState(initial = emptyList())
 
     Scaffold(
         topBar = {
@@ -100,11 +101,11 @@ fun ProdutoItem(produto: Produto) {
             modifier = Modifier.padding(16.dp)
         ) {
             Text(
-                text = "Código: ${produto.codigoProduto}",
+                text = "Código: ${produto.codigo}",
                 fontWeight = FontWeight.Bold
             )
-            Text("Nome: ${produto.nomeProduto}")
-            Text("Descrição: ${produto.descricaoProduto}")
+            Text("Nome: ${produto.nome}")
+            Text("Descrição: ${produto.descricao}")
             Text("Estoque: ${produto.estoque}")
         }
     }
