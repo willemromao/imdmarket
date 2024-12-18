@@ -70,7 +70,7 @@ fun CadastroProdutoScreen(
                         .fillMaxWidth()
                         .padding(vertical = 8.dp),
                     keyboardOptions = KeyboardOptions.Default.copy(
-                        keyboardType = KeyboardType.Text
+                        keyboardType = KeyboardType.Number
                     )
                 )
 
@@ -133,27 +133,29 @@ fun CadastroProdutoScreen(
                             }
 
                             val novoProduto = Produto(
-                                id = null, // ID será gerado automaticamente no SQLite
+                                id = null,
                                 codigo = codigo,
                                 nome = nome,
                                 descricao = descricao,
                                 estoque = estoqueInt
                             )
 
-                            val sucesso = produtoViewModel.adicionarProduto(novoProduto)
-                            if (sucesso) {
-                                Toast.makeText(
-                                    context,
-                                    "Produto cadastrado com sucesso!",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                                navController.navigate(Screen.Menu.route)
-                            } else {
-                                Toast.makeText(
-                                    context,
-                                    "Erro ao cadastrar o produto. Tente novamente!",
-                                    Toast.LENGTH_SHORT
-                                ).show()
+                            produtoViewModel.adicionarProduto(novoProduto) { sucesso, mensagem ->
+                                if (sucesso) {
+                                    Toast.makeText(
+                                        context,
+                                        "Produto cadastrado com sucesso!",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                    navController.navigate(Screen.Menu.route)
+                                } else {
+                                    val mensagemErro = mensagem ?: "Esse código já existe. Digite outro!"
+                                    Toast.makeText(
+                                        context,
+                                        mensagemErro,
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
                             }
                         },
                         modifier = Modifier

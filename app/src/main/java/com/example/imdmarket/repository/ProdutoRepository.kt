@@ -9,7 +9,6 @@ class ProdutoRepository(context: Context) {
 
     private val dbHelper = ProdutoDatabaseHelper(context)
 
-    // Insere um produto no banco de dados
     fun inserirProduto(produto: Produto): Long {
         val db = dbHelper.writableDatabase
         val values = ContentValues().apply {
@@ -21,7 +20,6 @@ class ProdutoRepository(context: Context) {
         return db.insert("Produto", null, values)
     }
 
-    // Lista todos os produtos do banco de dados
     fun listarProdutos(): List<Produto> {
         val db = dbHelper.readableDatabase
         val cursor = db.query(
@@ -46,7 +44,6 @@ class ProdutoRepository(context: Context) {
         return produtos
     }
 
-    // Atualiza um produto no banco de dados
     fun atualizarProduto(produto: Produto): Int {
         val db = dbHelper.writableDatabase
         val values = ContentValues().apply {
@@ -63,7 +60,6 @@ class ProdutoRepository(context: Context) {
         )
     }
 
-    // Deleta um produto pelo código
     fun deletarProdutoPorCodigo(codigo: String): Int {
         val db = dbHelper.writableDatabase
         return db.delete(
@@ -73,7 +69,6 @@ class ProdutoRepository(context: Context) {
         )
     }
 
-    // Busca um produto pelo código
     fun buscarProdutoPorCodigo(codigo: String): Produto? {
         val db = dbHelper.readableDatabase
         val cursor = db.query(

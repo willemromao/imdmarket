@@ -11,7 +11,7 @@ class ProdutoDatabaseHelper(context: Context) :
         val CREATE_TABLE = """
             CREATE TABLE $TABLE_PRODUTO (
                 $COLUMN_ID INTEGER PRIMARY KEY AUTOINCREMENT,
-                $COLUMN_CODIGO TEXT NOT NULL,
+                $COLUMN_CODIGO TEXT NOT NULL UNIQUE,
                 $COLUMN_NOME TEXT NOT NULL,
                 $COLUMN_DESCRICAO TEXT,
                 $COLUMN_ESTOQUE INTEGER NOT NULL
@@ -27,7 +27,7 @@ class ProdutoDatabaseHelper(context: Context) :
 
     companion object {
         const val DATABASE_NAME = "produtos.db"
-        const val DATABASE_VERSION = 1
+        const val DATABASE_VERSION = 2
         const val TABLE_PRODUTO = "Produto"
         const val COLUMN_ID = "id"
         const val COLUMN_CODIGO = "codigo"

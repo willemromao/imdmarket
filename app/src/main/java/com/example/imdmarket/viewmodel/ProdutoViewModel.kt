@@ -17,44 +17,47 @@ class ProdutoViewModel(private val repository: ProdutoRepository) : ViewModel() 
         carregarProdutos()
     }
 
-    // Carrega todos os produtos do repositório
     fun carregarProdutos() {
         viewModelScope.launch {
             _produtos.value = repository.listarProdutos()
         }
     }
 
-    // Adiciona um produto
-    fun adicionarProduto(produto: Produto): Boolean {
-        val resultado = repository.inserirProduto(produto)
-        if (resultado > 0) {
-            carregarProdutos() // Atualiza a lista após adicionar
-            return true
-        }
-        return false
-    }
-
-    // Atualiza um produto
     fun atualizarProduto(produto: Produto): Boolean {
         val resultado = repository.atualizarProduto(produto)
         if (resultado > 0) {
-            carregarProdutos() // Atualiza a lista após alterar
+            carregarProdutos()
             return true
         }
         return false
     }
 
-    // Deleta um produto pelo código
+    fun adicionarProduto(produto: Produto, onResult: (Boolean, String?) -> Unit) {
+        viewModelScope.launch {
+            val produtoExistente = repository.buscarProdutoPorCodigo(produto.codigo)
+            if (produtoExistente != null) {
+                onResult(false, "Produto com este código já existe.")
+            } else {
+                val resultado = repository.inserirProduto(produto)
+                if (resultado > 0) {
+                    carregarProdutos()
+                    onResult(true, null)
+                } else {
+                    onResult(false, "Erro ao cadastrar o produto. Tente novamente!")
+                }
+            }
+        }
+    }
+
     fun deletarProdutoPorCodigo(codigo: String): Boolean {
         val resultado = repository.deletarProdutoPorCodigo(codigo)
         if (resultado > 0) {
-            carregarProdutos() // Atualiza a lista após deletar
+            carregarProdutos()
             return true
         }
         return false
     }
 
-    // Busca um produto pelo código
     fun buscarProdutoPorCodigo(codigo: String): Produto? {
         return repository.buscarProdutoPorCodigo(codigo)
     }

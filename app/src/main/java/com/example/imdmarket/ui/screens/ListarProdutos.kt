@@ -19,7 +19,6 @@ import com.example.imdmarket.viewmodel.ProdutoViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ListarProdutosScreen(navController: NavController, produtoViewModel: ProdutoViewModel) {
-    // Carregar os produtos do banco de dados
     val produtos by produtoViewModel.produtos.collectAsState(initial = emptyList())
 
     Scaffold(

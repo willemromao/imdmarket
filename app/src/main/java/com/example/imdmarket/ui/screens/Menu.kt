@@ -30,7 +30,7 @@ fun MenuScreen(navController: NavController) {
                     )
                 },
                 colors = TopAppBarDefaults.mediumTopAppBarColors(
-                    containerColor = Color(0xFF0F3C8D)  // Cor de fundo da barra
+                    containerColor = Color(0xFF0F3C8D)
                 )
             )
         },
@@ -54,7 +54,7 @@ fun MenuScreen(navController: NavController) {
 
                 Row(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceEvenly // Para distribuir os botões igualmente
+                    horizontalArrangement = Arrangement.SpaceEvenly
                 ) {
                     Button(
                         onClick = {navController.navigate(Screen.CadastroProduto.route) },

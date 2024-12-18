@@ -19,7 +19,6 @@ fun Navigation(
         startDestination = Screen.Login.route
     ) {
         composable(Screen.Login.route) {
-            // Cria ou obtém o LoginViewModel usando viewModel()
             val loginViewModel: LoginViewModel = viewModel()
             LoginScreen(navController = navController, viewModel = loginViewModel)
         }
@@ -41,7 +40,6 @@ fun Navigation(
     }
 }
 
-// Classes para definir as rotas do aplicativo
 sealed class Screen(val route: String) {
     object Login : Screen("login")
     object Menu : Screen("menu")
