@@ -19,13 +19,10 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Configuração da interface do aplicativo
         setContent {
-            // Inicializa o ProdutoViewModel usando o ProdutoViewModelFactory
             val produtoViewModel: ProdutoViewModel = viewModel(
                 factory = ProdutoViewModelFactory(applicationContext)
             )
-            // Passa o ProdutoViewModel para o App
             App(produtoViewModel)
         }
     }
@@ -34,15 +31,12 @@ class MainActivity : ComponentActivity() {
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun App(produtoViewModel: ProdutoViewModel) {
-    // Inicializa o controlador de navegação
     val navController = rememberNavController()
 
-    // Configuração do tema e Scaffold principal
     IMDMarketTheme {
         Scaffold(
             modifier = Modifier.fillMaxSize()
         ) {
-            // Passa o ProdutoViewModel para o sistema de navegação
             Navigation(navController, produtoViewModel)
         }
     }
