@@ -37,6 +37,10 @@ fun Navigation(
         composable(Screen.ListarProdutos.route) {
             ListarProdutosScreen(navController = navController, produtoViewModel = produtoViewModel)
         }
+        composable(Screen.RecoverPassword.route) { // Nova rota
+            val loginViewModel: LoginViewModel = viewModel()
+            RecoverPasswordScreen(navController = navController, viewModel = loginViewModel)
+        }
     }
 }
 
@@ -47,4 +51,5 @@ sealed class Screen(val route: String) {
     object AlterarProduto : Screen("alterar_produto")
     object DeletarProduto : Screen("deletar_produto")
     object ListarProdutos : Screen("listar_produtos")
+    object RecoverPassword : Screen("recover_password")
 }

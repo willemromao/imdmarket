@@ -16,6 +16,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.imdmarket.viewmodel.LoginViewModel
+import android.widget.Toast
+import androidx.compose.runtime.*
+import androidx.compose.ui.platform.LocalContext
+import com.example.imdmarket.navigation.Screen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -28,6 +32,17 @@ fun LoginScreen(
 
     viewModel.username.value = username
     viewModel.password.value = password
+
+    val context = LocalContext.current
+
+    val loginError = viewModel.loginError.value
+    if (loginError != null) {
+        LaunchedEffect(loginError) {
+            Toast.makeText(context, loginError, Toast.LENGTH_SHORT).show()
+            viewModel.loginError.value = null
+        }
+    }
+
 
     Scaffold(
         topBar = {
@@ -94,7 +109,7 @@ fun LoginScreen(
                 }
 
                 TextButton(
-                    onClick = { /* Lógica para recuperação de senha */ },
+                    onClick = { navController.navigate(Screen.RecoverPassword.route) },
                     modifier = Modifier.padding(top = 8.dp)
                 ) {
                     Text("Esqueci minha senha/login")
